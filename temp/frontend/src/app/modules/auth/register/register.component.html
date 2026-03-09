@@ -1,0 +1,49 @@
+<section class="ui-page">
+  <div class="ui-card ui-auth-card">
+    <h2 class="ui-title">Register</h2>
+    <p class="ui-subtitle">Create your RevPlay account.</p>
+
+    <form class="ui-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="ui-field">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" formControlName="firstName" />
+      </div>
+
+      <div class="ui-field">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" formControlName="lastName" />
+      </div>
+
+      <div class="ui-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+      </div>
+
+      <div class="ui-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+      </div>
+
+      <div class="ui-field">
+        <label for="role">Role</label>
+        <select id="role" formControlName="role">
+          <option value="USER">USER</option>
+          <option value="ARTIST">ARTIST</option>
+        </select>
+      </div>
+
+      <div class="ui-actions">
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Registering...' : 'Register' }}
+        </button>
+      </div>
+    </form>
+
+    <p *ngIf="successMessage" class="ui-message ui-message-success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+    <p class="auth-switch">
+      Already registered?
+      <a class="ui-link" routerLink="/home/login">Login</a>
+    </p>
+  </div>
+</section>

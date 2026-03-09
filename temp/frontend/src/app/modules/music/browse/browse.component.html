@@ -1,0 +1,54 @@
+<h2>Browse Songs</h2>
+
+<div class="card">
+  <h3>Advanced Search</h3>
+  <label>Query</label>
+  <input [(ngModel)]="advancedSearch.query" />
+  <label>Artist</label>
+  <input [(ngModel)]="advancedSearch.artistName" />
+  <label>Genre</label>
+  <input [(ngModel)]="advancedSearch.genre" />
+  <button type="button" (click)="runAdvancedSearch()">Search</button>
+</div>
+
+<div class="card">
+  <h3>Genres</h3>
+  <button *ngFor="let genre of genres" type="button" (click)="advancedSearch.genre = genre.name; runAdvancedSearch()">
+    {{ genre.name }} ({{ genre.songCount }})
+  </button>
+</div>
+
+<div class="card">
+  <h3>Trending</h3>
+  <button type="button" (click)="loadTrending('daily')">Daily</button>
+  <button type="button" (click)="loadTrending('weekly')">Weekly</button>
+  <button type="button" (click)="loadTrending('monthly')">Monthly</button>
+  <ul>
+    <li *ngFor="let song of trendingSongs">{{ song.title }} - {{ song.artistName }}</li>
+  </ul>
+</div>
+
+<div *ngIf="loading" class="card">Loading songs...</div>
+<div *ngIf="errorMessage" class="card">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && songs.length === 0" class="card">
+  <p>No songs available.</p>
+</div>
+
+<div *ngFor="let song of songs" class="card browse-row">
+  <div class="song-main">
+    <p class="song-title">{{ song.title }}</p>
+    <p>{{ song.artistName }} | {{ song.genre || '-' }} | Plays: {{ song.playCount || 0 }}</p>
+  </div>
+  <div class="song-actions">
+    <button type="button" class="play-toggle" (click)="playSong(song.id)">Play</button>
+    <button type="button" class="view-toggle" (click)="viewSongDetails(song.id)">Details</button>
+    <button
+      type="button"
+      class="favorite-toggle"
+      [class.favorite-on]="song.isFavorite"
+      (click)="toggleFavorite(song.id, song.isFavorite)">
+      {{ song.isFavorite ? 'Unfavorite' : 'Favorite' }}
+    </button>
+  </div>
+</div>

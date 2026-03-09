@@ -1,0 +1,12 @@
+<div class="search-wrap">
+  <input 
+    type="text"
+    placeholder="Search songs, artists, albums..."
+    [(ngModel)]="keyword"
+    (keyup.enter)="onSearch()"
+  />
+
+  <button type="button" (click)="onSearch()">
+    Search
+  </button>
+</div>

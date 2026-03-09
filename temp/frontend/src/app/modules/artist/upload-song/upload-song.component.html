@@ -1,0 +1,56 @@
+<section class="ui-page">
+  <div class="ui-card artist-upload-card">
+    <h2 class="ui-title">Upload Song</h2>
+    <p class="ui-subtitle">Add a new track to your catalog.</p>
+
+    <p *ngIf="successMessage" class="ui-message ui-message-success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+
+    <form class="ui-form" [formGroup]="uploadForm" (ngSubmit)="uploadSong()">
+      <div class="ui-field">
+        <label>Title</label>
+        <input type="text" formControlName="title" />
+      </div>
+
+      <div class="ui-field">
+        <label>Genre</label>
+        <input type="text" formControlName="genre" />
+      </div>
+
+      <div class="ui-field">
+        <label>Duration (seconds)</label>
+        <input type="number" formControlName="duration" />
+      </div>
+
+      <div class="ui-field">
+        <label>Audio File URL</label>
+        <input type="text" formControlName="fileUrl" placeholder="https://..." />
+      </div>
+
+      <div class="ui-field">
+        <label>Cover Image URL</label>
+        <input type="text" formControlName="coverImageUrl" placeholder="https://..." />
+      </div>
+
+      <div class="ui-field">
+        <label>Album ID (optional)</label>
+        <input type="number" formControlName="albumId" />
+      </div>
+
+      <div class="ui-field">
+        <label>Visibility</label>
+        <select formControlName="visibility">
+          <option value="PUBLIC">Public</option>
+          <option value="PRIVATE">Private</option>
+          <option value="UNLISTED">Unlisted</option>
+        </select>
+      </div>
+
+      <div class="ui-actions">
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+
+    <a class="ui-link back-link" routerLink="/artist/dashboard">Back to Dashboard</a>
+  </div>
+</section>

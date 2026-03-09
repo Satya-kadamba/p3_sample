@@ -1,0 +1,42 @@
+.favorite-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.song-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.song-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.song-artist {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.favorite-toggle {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: #ef4444;
+  stroke: #ef4444;
+  stroke-width: 1.8;
+}

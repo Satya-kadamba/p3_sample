@@ -1,0 +1,17 @@
+<div *ngIf="loading" class="card">
+  <p>Loading song details...</p>
+</div>
+
+<div *ngIf="!loading && !song" class="card">
+  <p>Song details not found.</p>
+</div>
+
+<div *ngIf="!loading && song" class="card detail-card">
+  <h2>{{ song.title }}</h2>
+  <p><strong>Artist:</strong> {{ song.artistName }}</p>
+  <p><strong>Album:</strong> {{ song.albumTitle || 'Single' }}</p>
+  <p><strong>Genre:</strong> {{ song.genre || '-' }}</p>
+  <p><strong>Duration:</strong> {{ song.duration ? (song.duration + ' sec') : '-' }}</p>
+  <p><strong>Plays:</strong> {{ song.playCount || 0 }}</p>
+  <p><strong>Created:</strong> {{ song.createdAt ? (song.createdAt | date:'medium') : '-' }}</p>
+</div>

@@ -1,0 +1,73 @@
+<div class="app-shell">
+  <header class="top-nav" *ngIf="authService.isLoggedIn() && !router.url.startsWith('/home')">
+    <div class="nav-left">
+      <div class="brand">RevPlay</div>
+      <div class="nav-search-wrap" *ngIf="authService.getUserRole() === 'USER'" [class.expanded]="searchExpanded">
+        <form class="nav-search" (ngSubmit)="onSearch()">
+          <input
+            type="text"
+            name="globalSearch"
+            placeholder="Search songs or artists"
+            [(ngModel)]="searchTerm"
+            (focus)="onSearchFocus()"
+          />
+        </form>
+
+        <div class="search-tools" *ngIf="searchExpanded">
+          <input
+            type="text"
+            name="artistFilter"
+            placeholder="Filter by artist"
+            [(ngModel)]="artistFilter"
+          />
+          <input
+            type="text"
+            name="albumFilter"
+            placeholder="Filter by album"
+            [(ngModel)]="albumFilter"
+          />
+          <input
+            type="text"
+            name="genreFilter"
+            placeholder="Filter by genre"
+            [(ngModel)]="genreFilter"
+          />
+          <input
+            type="date"
+            name="releaseDateFilter"
+            [(ngModel)]="releaseDateFilter"
+          />
+          <select name="sortBy" [(ngModel)]="sortBy">
+            <option value="">Sort: none</option>
+            <option value="releaseDateDesc">Release Date (Newest)</option>
+            <option value="releaseDateAsc">Release Date (Oldest)</option>
+            <option value="artistAsc">Artist A-Z</option>
+            <option value="albumAsc">Album A-Z</option>
+            <option value="genreAsc">Genre A-Z</option>
+          </select>
+          <button type="button" (click)="applySearchOptions()">Apply</button>
+          <button type="button" (click)="clearSearchOptions()">Clear</button>
+        </div>
+      </div>
+    </div>
+    <nav class="nav-links" *ngIf="authService.getUserRole() === 'USER'">
+      <a routerLink="/player" routerLinkActive="active">Player</a>
+      <a routerLink="/history" routerLinkActive="active">History</a>
+      <a routerLink="/browse" routerLinkActive="active">Browse</a>
+      <a routerLink="/favorites" routerLinkActive="active">Favorites</a>
+      <a routerLink="/playlists" routerLinkActive="active">Playlists</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </nav>
+    <nav class="nav-links" *ngIf="authService.getUserRole() === 'ARTIST'">
+      <a routerLink="/artist/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/artist/upload-song" routerLinkActive="active">Upload Song</a>
+      <a routerLink="/artist/my-songs" routerLinkActive="active">My Songs</a>
+      <a routerLink="/artist/manage-albums" routerLinkActive="active">Albums</a>
+      <a routerLink="/artist/profile" routerLinkActive="active">Profile</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

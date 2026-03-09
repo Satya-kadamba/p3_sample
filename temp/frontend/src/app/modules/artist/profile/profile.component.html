@@ -1,0 +1,52 @@
+<section class="ui-page">
+  <div class="ui-card artist-profile-card">
+    <h2 class="ui-title">Artist Profile</h2>
+    <p class="ui-subtitle">Manage your artist profile details.</p>
+
+    <p *ngIf="errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+
+    <div *ngIf="profile && !isEditMode && !creating">
+      <div class="info-grid">
+        <p><strong>Stage Name:</strong> {{ profile.stageName }}</p>
+        <p><strong>Verified:</strong> {{ profile.verified ? 'Yes' : 'No' }}</p>
+        <p><strong>Songs:</strong> {{ profile.songCount }}</p>
+        <p><strong>Albums:</strong> {{ profile.albumCount }}</p>
+        <p><strong>Total Plays:</strong> {{ profile.totalPlays }}</p>
+        <p class="info-full"><strong>Bio:</strong> {{ profile.bio || '-' }}</p>
+      </div>
+
+      <div class="ui-actions">
+        <button type="button" (click)="enableEdit()">Edit Profile</button>
+        <button type="button" class="ui-btn-secondary" (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div *ngIf="creating || isEditMode || !profile">
+      <form class="ui-form" (ngSubmit)="saveProfile()">
+        <div class="ui-field">
+          <label>Stage Name</label>
+          <input type="text" [(ngModel)]="form.stageName" name="stageName" />
+        </div>
+
+        <div class="ui-field">
+          <label>Bio</label>
+          <textarea [(ngModel)]="form.bio" name="bio"></textarea>
+        </div>
+
+        <div class="ui-field">
+          <label>Profile Image URL</label>
+          <input type="text" [(ngModel)]="form.profileImageUrl" name="profileImageUrl" />
+        </div>
+
+        <div class="ui-actions">
+          <button type="submit">{{ creating ? 'Create' : 'Update' }}</button>
+          <button type="button" class="ui-btn-secondary" *ngIf="isEditMode" (click)="cancelEdit()">Cancel</button>
+          <button type="button" class="ui-btn-secondary" (click)="logout()">Logout</button>
+        </div>
+      </form>
+    </div>
+
+    <hr />
+    <a class="ui-link" routerLink="/artist/dashboard">Back to Dashboard</a>
+  </div>
+</section>

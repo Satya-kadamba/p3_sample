@@ -1,0 +1,22 @@
+.search-wrap {
+  margin: 15px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-wrap input {
+  padding: 9px 10px;
+  width: min(420px, 100%);
+  border: 1px solid #ced8ea;
+  border-radius: 8px;
+}
+
+.search-wrap button {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #123f96;
+  color: #fff;
+  cursor: pointer;
+}

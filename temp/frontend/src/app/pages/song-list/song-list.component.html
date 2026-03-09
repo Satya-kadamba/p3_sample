@@ -1,0 +1,74 @@
+<section class="browse-page">
+  <h2>Browse Songs</h2>
+
+  <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+
+  <h3>Filter & Sort</h3>
+  <div class="filter-panel">
+    <input [(ngModel)]="filters.title" placeholder="Song Title (partial)" />
+    <input [(ngModel)]="filters.genre" placeholder="Genre" />
+    <input [(ngModel)]="filters.album" placeholder="Album" />
+    <input [(ngModel)]="filters.releaseYear" placeholder="Release Year" />
+    <select [(ngModel)]="filters.sort">
+      <option value="">Sort By</option>
+      <option value="title,asc">Title (A-Z)</option>
+      <option value="title,desc">Title (Z-A)</option>
+      <option value="releaseDate,desc">Release Date (Newest)</option>
+      <option value="releaseDate,asc">Release Date (Oldest)</option>
+    </select>
+    <button (click)="applyFilters()">Apply Filters</button>
+    <button class="secondary" (click)="resetFilters()">Reset</button>
+  </div>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <div *ngIf="loading" class="loader">Loading music...</div>
+
+  <div *ngIf="!loading && songs.length === 0 && artists.length === 0 && albums.length === 0" class="empty-state">
+    No results found.
+  </div>
+
+  <div *ngIf="!loading && songs.length > 0">
+    <h3>Songs</h3>
+    <ul class="song-list">
+      <li class="song-card" *ngFor="let song of songs">
+        <div class="song-header">
+          <b>{{ song.title }}</b>
+          <a [routerLink]="['/song', song.id]">View Details</a>
+        </div>
+        <div class="song-meta">
+          Artist:
+          <a *ngIf="song.artistId; else artistText" [routerLink]="['/artist', song.artistId]">{{ song.artistName }}</a>
+          <ng-template #artistText>{{ song.artistName }}</ng-template>
+          | Album:
+          <a *ngIf="song.albumId; else albumText" [routerLink]="['/album', song.albumId]">{{ song.albumName }}</a>
+          <ng-template #albumText>{{ song.albumName }}</ng-template>
+          | Genre: {{ song.genre }} | Duration: {{ song.duration }} sec | Release: {{ song.releaseDate }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!loading && artists.length > 0">
+    <h3>Artists</h3>
+    <ul>
+      <li *ngFor="let artist of artists">
+        <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!loading && albums.length > 0">
+    <h3>Albums</h3>
+    <ul>
+      <li *ngFor="let album of albums">
+        <a [routerLink]="['/album', album.id]">{{ album.name }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!isSearchMode && !loading" class="pagination-bar">
+    <button (click)="previousPage()">Previous</button>
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()">Next</button>
+  </div>
+</section>

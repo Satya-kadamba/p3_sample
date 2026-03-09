@@ -1,0 +1,49 @@
+<section class="ui-page">
+  <div class="ui-card history-container">
+    <div class="history-header">
+      <div>
+        <h2 class="ui-title">Recently Played</h2>
+        <p class="ui-subtitle">Last 50 songs from your listening history.</p>
+      </div>
+      <button type="button" class="ui-btn-secondary" (click)="clearHistory()" [disabled]="historyItems.length === 0 || loading">
+        Clear History
+      </button>
+    </div>
+
+    <p *ngIf="loading" class="empty-state">Loading history...</p>
+    <p *ngIf="!loading && errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+    <p *ngIf="!loading && !errorMessage && historyItems.length === 0" class="empty-state">No listening history yet.</p>
+
+    <div class="card">
+      <h3>Stats</h3>
+      <p>Total songs played: {{ stats.totalSongsPlayed }}</p>
+      <p>Unique songs: {{ stats.uniqueSongsPlayed }}</p>
+      <p>Total listening seconds: {{ stats.totalListeningTimeSeconds }}</p>
+    </div>
+
+    <div class="card" *ngIf="topSongs.length > 0">
+      <h3>Top Songs</h3>
+      <ul>
+        <li *ngFor="let row of topSongs">
+          {{ row['title'] || row['songId'] }} - plays {{ row['playCount'] }}
+        </li>
+      </ul>
+    </div>
+
+    <ul *ngIf="!loading && historyItems.length > 0" class="history-list">
+      <li *ngFor="let item of historyItems; trackBy: trackByHistoryId">
+        <div class="song-meta">
+          <strong>{{ item.songTitle }}</strong>
+          <span>{{ item.artistName }}</span>
+          <span>{{ item.playedAt | date: 'medium' }}</span>
+          <span>Duration: {{ item.listenedDuration }}s</span>
+        </div>
+        <div>
+          <input type="number" [(ngModel)]="durationDraft[item.id]" placeholder="New duration" />
+          <button type="button" (click)="updateDuration(item)">Update Duration</button>
+          <a class="ui-link" [routerLink]="['/player']" [queryParams]="{ songId: item.songId }">Play Again</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

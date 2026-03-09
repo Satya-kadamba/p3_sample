@@ -1,0 +1,23 @@
+<div *ngIf="album" class="container">
+
+  <h2>{{ album.name }}</h2>
+  <p><strong>Artist:</strong> {{ album.artistName }}</p>
+  <p><strong>Release Date:</strong> {{ album.releaseDate }}</p>
+
+  <hr>
+
+  <h3>Tracks</h3>
+
+  <div *ngIf="album.songs?.length > 0; else noTracks">
+    <ul>
+      <li *ngFor="let song of album.songs">
+        {{ song.title }} ({{ song.genre }})
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noTracks>
+    <p>No songs available in this album.</p>
+  </ng-template>
+
+</div>

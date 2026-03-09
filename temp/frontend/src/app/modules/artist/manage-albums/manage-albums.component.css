@@ -1,0 +1,109 @@
+.albums-page {
+  display: grid;
+  gap: 14px;
+}
+
+.albums-header,
+.album-card {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+}
+
+.album-card {
+  display: grid;
+  gap: 14px;
+  border-left: 3px solid rgba(59, 130, 246, 0.45);
+}
+
+.album-form {
+  grid-template-columns: 1.2fr 1.5fr 1fr;
+  align-items: end;
+}
+
+.field-desc textarea {
+  min-height: 44px;
+  resize: vertical;
+}
+
+.header-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.album-main h3 {
+  margin: 0 0 8px;
+}
+
+.album-header p {
+  margin: 0 0 8px;
+  color: #cbd5e1;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  color: #cbd5e1;
+  font-size: 0.86rem;
+  padding: 4px 10px;
+}
+
+.edit-panel {
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+  padding-top: 12px;
+}
+
+.songs-section {
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+  padding-top: 10px;
+}
+
+.songs-section h4 {
+  margin: 0 0 8px;
+}
+
+.song-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.song-row:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 700px) {
+  .album-form {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .album-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .song-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

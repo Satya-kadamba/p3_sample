@@ -1,0 +1,44 @@
+<section class="ui-page">
+  <div class="ui-card ui-auth-card">
+    <h2 class="ui-title">Login</h2>
+    <p class="ui-subtitle">Welcome back to RevPlay.</p>
+
+    <form class="ui-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="ui-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+        <small
+          class="ui-error"
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        >
+          Valid email is required
+        </small>
+      </div>
+
+      <div class="ui-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+        <small
+          class="ui-error"
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+          Password is required
+        </small>
+      </div>
+
+      <div class="ui-actions">
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button>
+      </div>
+    </form>
+
+    <p *ngIf="successMessage" class="ui-message ui-message-success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+
+    <p class="auth-switch">
+      Not registered yet?
+      <a class="ui-link" [routerLink]="['/home/register']">Sign up</a>
+    </p>
+  </div>
+</section>

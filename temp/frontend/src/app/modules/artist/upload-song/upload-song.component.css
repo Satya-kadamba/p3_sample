@@ -1,0 +1,9 @@
+.artist-upload-card {
+  max-width: 760px;
+  margin: 8px auto 0;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 12px;
+}

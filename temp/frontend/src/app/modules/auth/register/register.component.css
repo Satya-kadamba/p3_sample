@@ -1,0 +1,9 @@
+.ui-auth-card {
+  max-width: 460px;
+  margin: 8px auto 0;
+}
+
+.auth-switch {
+  margin-top: 14px;
+  color: #cbd5e1;
+}

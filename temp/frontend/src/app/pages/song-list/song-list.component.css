@@ -1,0 +1,85 @@
+.browse-page {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 0 16px 28px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.filter-panel {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.filter-panel input,
+.filter-panel select {
+  padding: 9px 10px;
+  border: 1px solid #ced8ea;
+  border-radius: 8px;
+}
+
+button {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1658d5, #0c7cc7);
+  color: #fff;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #63718a;
+}
+
+.song-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.song-card {
+  border: 1px solid #e4ebf8;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.song-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(16, 51, 125, 0.12);
+}
+
+.song-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.song-meta {
+  color: #445067;
+  font-size: 14px;
+}
+
+.pagination-bar {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loader,
+.empty-state {
+  margin: 16px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: #edf4ff;
+}
+
+.error {
+  color: #ac1034;
+  margin: 8px 0;
+}

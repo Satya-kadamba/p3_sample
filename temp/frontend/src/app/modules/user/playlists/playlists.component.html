@@ -1,0 +1,66 @@
+<section class="ui-page playlists-page">
+  <div class="ui-card">
+    <h2 class="ui-title">My Playlists</h2>
+    <p class="ui-subtitle">Create playlists and manage songs.</p>
+
+    <div class="ui-form">
+      <div class="ui-field">
+        <label>Playlist Name</label>
+        <input [(ngModel)]="newPlaylist.name" placeholder="Playlist Name" />
+      </div>
+      <div class="ui-field">
+        <label>Description</label>
+        <input [(ngModel)]="newPlaylist.description" placeholder="Description" />
+      </div>
+      <div class="ui-field">
+        <label>Public</label>
+        <input type="checkbox" [(ngModel)]="newPlaylist.isPublic" />
+      </div>
+    </div>
+
+    <div class="ui-actions">
+      <button (click)="create()" [disabled]="!canCreatePlaylist()">Create Playlist</button>
+    </div>
+  </div>
+
+  <div *ngFor="let playlist of playlists" class="ui-card playlist-card">
+    <p class="playlist-title"><strong>{{ playlist.name }}</strong></p>
+    <p class="playlist-description">{{ playlist.description || 'No description' }}</p>
+    <p>Visibility: {{ playlist.isPublic ? 'Public' : 'Private' }}</p>
+
+    <div class="ui-form">
+      <div class="ui-field">
+        <label>Edit Name</label>
+        <input [(ngModel)]="editDrafts[playlist.id].name" placeholder="Edit name" />
+      </div>
+      <div class="ui-field">
+        <label>Edit Description</label>
+        <input [(ngModel)]="editDrafts[playlist.id].description" placeholder="Edit description" />
+      </div>
+      <div class="ui-field">
+        <label>Public</label>
+        <input type="checkbox" [(ngModel)]="editDrafts[playlist.id].isPublic" />
+      </div>
+    </div>
+
+    <div class="ui-actions action-row">
+      <button (click)="update(playlist.id)">Update</button>
+      <button class="ui-btn-danger" (click)="delete(playlist.id)">Delete</button>
+    </div>
+
+    <p><strong>Songs:</strong> {{ playlist.songCount }}</p>
+    <div class="song-add-row">
+      <select [(ngModel)]="songInput[playlist.id]" [disabled]="availableSongs.length === 0">
+        <option *ngFor="let song of availableSongs" [ngValue]="song.id">
+          {{ song.title }} - {{ song.artistName }}
+        </option>
+      </select>
+      <button (click)="addSong(playlist.id)" [disabled]="availableSongs.length === 0">Add Song</button>
+    </div>
+
+    <div *ngFor="let song of playlist.songs" class="song-row">
+      <span>{{ song.title }} - {{ song.artistName }}</span>
+      <button class="ui-btn-secondary" (click)="removeSong(playlist.id, song.id)">Remove</button>
+    </div>
+  </div>
+</section>

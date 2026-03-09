@@ -1,0 +1,26 @@
+<h2>My Favorites</h2>
+
+<div class="card">
+  <label>Check Song ID in Favorites</label>
+  <input type="number" [(ngModel)]="checkSongId" />
+  <button type="button" (click)="checkFavorite()">Check</button>
+  <p *ngIf="checkResult">{{ checkResult }}</p>
+</div>
+
+<div *ngIf="favorites.length === 0" class="card">
+  <p>No favorites yet.</p>
+</div>
+
+<div *ngFor="let song of favorites" class="card favorite-row">
+  <div class="song-main">
+    <p class="song-title">{{ song.songTitle }}</p>
+    <p class="song-artist">{{ song.artistName }}</p>
+  </div>
+  <button
+    type="button"
+    class="favorite-toggle favorite-on"
+    (click)="remove(song.songId)"
+    aria-label="Remove from favorites">
+    Remove
+  </button>
+</div>

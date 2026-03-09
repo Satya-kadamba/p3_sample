@@ -1,0 +1,6 @@
+.container {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 0 16px 24px;
+  font-family: "Segoe UI", sans-serif;
+}

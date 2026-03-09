@@ -1,0 +1,45 @@
+<section *ngIf="songs.length > 0; else noSongs" class="player">
+  <p *ngIf="loadError" class="player-warning">{{ loadError }}</p>
+  <header class="now-playing">
+    <div>
+      <span class="badge">Live Playback</span>
+      <h2>Now Playing</h2>
+      <p>{{ currentSong?.title }}</p>
+      <p *ngIf="nowPlaying">Last server now-playing: {{ nowPlaying.title }} ({{ nowPlaying.startedAt | date: 'short' }})</p>
+    </div>
+    <a routerLink="/history" class="history-link">Recently Played</a>
+  </header>
+
+  <div class="controls">
+    <button type="button" (click)="previous()" [disabled]="currentSongIndex === 0">Previous</button>
+    <button type="button" (click)="playPause()">{{ isPlaying ? 'Pause' : 'Play' }}</button>
+    <button type="button" (click)="next()" [disabled]="currentSongIndex === songs.length - 1">Next</button>
+  </div>
+
+  <div class="progress-row">
+    <span>{{ formatTime(currentTime) }}</span>
+    <input type="range" min="0" [max]="duration || 0" [value]="currentTime || 0" (input)="seek($event)" />
+    <span>{{ formatTime(duration) }}</span>
+  </div>
+
+  <div class="volume-row">
+    <label for="player-volume">Volume</label>
+    <input id="player-volume" type="range" min="0" max="1" step="0.01" [value]="volume" (input)="changeVolume($event)" />
+  </div>
+
+  <section class="queue">
+    <h3>Queue</h3>
+    <ul>
+      <li *ngFor="let song of songs; let i = index" [class.active]="isCurrentSong(i)">
+        <span>{{ song.title }}</span>
+        <button type="button" (click)="playSong(i)">Play</button>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<ng-template #noSongs>
+  <section class="player">
+    <p>{{ loadError || 'No songs available.' }}</p>
+  </section>
+</ng-template>

@@ -1,0 +1,29 @@
+<section class="ui-page">
+  <div class="ui-card ui-auth-card">
+    <h2 class="ui-title">Create Artist Profile</h2>
+    <p class="ui-subtitle">Complete your artist details.</p>
+
+    <p *ngIf="errorMessage" class="ui-message ui-message-error">{{ errorMessage }}</p>
+
+    <form class="ui-form" [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="ui-field">
+        <label>Stage Name</label>
+        <input type="text" formControlName="stageName" />
+      </div>
+
+      <div class="ui-field">
+        <label>Bio</label>
+        <textarea formControlName="bio"></textarea>
+      </div>
+
+      <div class="ui-field">
+        <label>Profile Image URL</label>
+        <input type="text" formControlName="profileImageUrl" />
+      </div>
+
+      <div class="ui-actions">
+        <button type="submit">Create Profile</button>
+      </div>
+    </form>
+  </div>
+</section>

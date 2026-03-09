@@ -1,0 +1,87 @@
+<section class="ui-page songs-page">
+  <div class="ui-card songs-header">
+    <div class="header-row">
+      <div>
+        <h2 class="ui-title">My Songs</h2>
+        <p class="ui-subtitle">Manage uploaded tracks and visibility.</p>
+      </div>
+      <a class="ui-link back-chip" routerLink="/artist/dashboard">Back to Dashboard</a>
+    </div>
+  </div>
+
+  <div *ngIf="songs.length === 0" class="ui-card empty-card">No songs uploaded yet.</div>
+
+  <div *ngFor="let song of songs" class="ui-card song-card">
+    <div class="song-top">
+      <h3>{{ song.title }}</h3>
+      <span class="state-badge">{{ song.visibility }}</span>
+    </div>
+
+    <div class="song-meta-grid">
+      <div class="meta-item">
+        <label>Genre</label>
+        <span>{{ song.genre || 'N/A' }}</span>
+      </div>
+      <div class="meta-item">
+        <label>Duration</label>
+        <span>{{ song.duration }} sec</span>
+      </div>
+      <div class="meta-item">
+        <label>Plays</label>
+        <span>{{ song.playCount }}</span>
+      </div>
+      <div class="meta-item">
+        <label>Song Id</label>
+        <span>#{{ song.id }}</span>
+      </div>
+    </div>
+
+    <div class="ui-actions song-actions">
+      <button type="button" (click)="startEdit(song)">Edit</button>
+      <button type="button" class="ui-btn-secondary" (click)="toggleVisibility(song)">Toggle Visibility</button>
+      <button type="button" class="ui-btn-danger" (click)="deleteSong(song.id)">Delete</button>
+    </div>
+
+    <div *ngIf="editingSongId === song.id" class="edit-panel">
+      <div class="ui-form">
+        <div class="ui-field">
+          <label>Title</label>
+          <input [(ngModel)]="editForm.title" placeholder="Title" />
+        </div>
+        <div class="ui-field">
+          <label>Genre</label>
+          <input [(ngModel)]="editForm.genre" placeholder="Genre" />
+        </div>
+        <div class="ui-field">
+          <label>Duration</label>
+          <input [(ngModel)]="editForm.duration" type="number" placeholder="Duration" />
+        </div>
+        <div class="ui-field">
+          <label>File URL</label>
+          <input [(ngModel)]="editForm.fileUrl" placeholder="https://..." />
+        </div>
+        <div class="ui-field">
+          <label>Cover URL</label>
+          <input [(ngModel)]="editForm.coverImageUrl" placeholder="https://..." />
+        </div>
+        <div class="ui-field">
+          <label>Album ID</label>
+          <input [(ngModel)]="editForm.albumId" type="number" placeholder="optional" />
+        </div>
+        <div class="ui-field">
+          <label>Visibility</label>
+          <select [(ngModel)]="editForm.visibility">
+            <option value="PUBLIC">PUBLIC</option>
+            <option value="PRIVATE">PRIVATE</option>
+            <option value="UNLISTED">UNLISTED</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="ui-actions">
+        <button type="button" (click)="updateSong(song.id)">Save</button>
+        <button type="button" class="ui-btn-secondary" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+.history-container {
+  max-width: 860px;
+  margin: 8px auto 0;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  gap: 10px;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.history-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.song-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.song-meta span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.empty-state {
+  color: #94a3b8;
+}
+
+@media (max-width: 720px) {
+  .history-header {
+    flex-direction: column;
+  }
+  .history-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

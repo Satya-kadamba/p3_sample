@@ -1,0 +1,10 @@
+.home-shell {
+  min-height: 100vh;
+  padding-top: 1.5rem;
+}
+
+.home-title {
+  text-align: center;
+  margin: 0 0 1rem;
+  text-transform: capitalize;
+}
